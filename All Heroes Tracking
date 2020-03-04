@@ -1,0 +1,3357 @@
+settings
+{
+	main
+	{
+		Description: "Good for tracking and flicking training. Deal 500 damage before your allies to trigger the countdown to the Insanity Wave and defeat your opponents. Deal enough damage to abort an opponent wave to survive. The wave won't trigger if you are playing solo."
+	}
+
+	lobby
+	{
+		Allow Players Who Are In Queue: Yes
+		Max Team 2 Players: 0
+		Return To Lobby: Never
+		Swap Teams After Match: No
+	}
+
+	modes
+	{
+		disabled Control
+		{
+			Capture Speed Modifier: 10%
+			Scoring Speed Modifier: 10%
+		}
+
+		disabled Practice Range
+		{
+			Spawn Training Bots: Off
+		}
+
+		Skirmish
+		{
+			enabled maps
+			{
+				Workshop Chamber
+			}
+		}
+
+		General
+		{
+			Game Mode Start: Immediately
+			Hero Limit: Off
+			Respawn Time Scalar: 32%
+		}
+	}
+
+	heroes
+	{
+		General
+		{
+			Ana
+			{
+				Damage Dealt: 10%
+				Healing Dealt: 10%
+				Healing Received: 500%
+				Health: 500%
+			}
+
+			Ashe
+			{
+				Damage Dealt: 10%
+			}
+
+			Baptiste
+			{
+				Damage Dealt: 10%
+				Damage Received: 103%
+				Healing Dealt: 500%
+				Healing Received: 500%
+			}
+
+			Bastion
+			{
+				Damage Dealt: 10%
+			}
+
+			Brigitte
+			{
+				Damage Dealt: 10%
+			}
+
+			D.Va
+			{
+				Damage Dealt: 10%
+			}
+
+			Doomfist
+			{
+				Damage Dealt: 10%
+			}
+
+			Genji
+			{
+				Damage Dealt: 10%
+			}
+
+			Hanzo
+			{
+				Damage Dealt: 10%
+			}
+
+			Junkrat
+			{
+				Damage Dealt: 10%
+			}
+
+			LÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºcio
+			{
+				Damage Dealt: 10%
+				Healing Dealt: 500%
+				Healing Received: 500%
+			}
+
+			McCree
+			{
+				Damage Dealt: 10%
+			}
+
+			Mei
+			{
+				Damage Dealt: 10%
+				Freeze Stacking: On
+			}
+
+			Mercy
+			{
+				Damage Dealt: 10%
+			}
+
+			Moira
+			{
+				Damage Dealt: 10%
+			}
+
+			Orisa
+			{
+				Damage Dealt: 10%
+			}
+
+			Pharah
+			{
+				Damage Dealt: 10%
+			}
+
+			Reaper
+			{
+				Damage Dealt: 10%
+			}
+
+			Reinhardt
+			{
+				Damage Dealt: 10%
+			}
+
+			Roadhog
+			{
+				Damage Dealt: 10%
+			}
+
+			Sigma
+			{
+				Damage Dealt: 10%
+			}
+
+			Soldier: 76
+			{
+				Biotic Field Cooldown Time: 0%
+				Damage Dealt: 10%
+				Healing Dealt: 500%
+				Healing Received: 500%
+				Health: 500%
+			}
+
+			Sombra
+			{
+				Damage Dealt: 10%
+				Quick Melee: Off
+			}
+
+			Symmetra
+			{
+				Damage Dealt: 10%
+			}
+
+			TorbjÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶rn
+			{
+				Damage Dealt: 10%
+			}
+
+			Tracer
+			{
+				Blink Cooldown Time: 0%
+				Damage Dealt: 10%
+				Damage Received: 500%
+				Healing Received: 10%
+				Recall Cooldown Time: 0%
+				Ultimate Generation - Combat Pulse Bomb: 500%
+				Ultimate Generation - Passive Pulse Bomb: 500%
+				Ultimate Generation Pulse Bomb: 500%
+			}
+
+			Widowmaker
+			{
+				Damage Dealt: 10%
+			}
+
+			Winston
+			{
+				Damage Dealt: 10%
+			}
+
+			Wrecking Ball
+			{
+				Damage Dealt: 10%
+			}
+
+			Zarya
+			{
+				Damage Dealt: 10%
+				Ultimate Ability Graviton Surge: Off
+			}
+
+			Zenyatta
+			{
+				Damage Dealt: 10%
+				Healing Dealt: 171%
+			}
+
+			enabled heroes
+			{
+				Tracer
+			}
+		}
+	}
+}
+
+variables
+{
+	global:
+		0: not_first_round
+		1: ROUND_STARTED
+		3: array_of_team_1_to_defuse
+		4: sum_of_damage_total_to_defuse
+		6: count_down_to_round_start
+		7: wait_destroy_action_before_hud
+		8: defused
+		10: array_of_team_1_to_be_killed
+		11: survive_after_untrapment
+		12: lock_facing_on_trapper_player
+		13: countdown_time
+		14: array_with_the_trigger_player
+		15: total_unstucks_count
+		16: bot_hit_the_wall
+		19: total_time_elapsed_without_assem
+		20: Ultimate_on_off
+		21: Array_of_vectors_volskaya
+		22: TURN_VICTORY_CONDITION_ON_OFF
+		23: array_with_trigger_in_order
+		24: all_dmg_and_time_counts_frozen
+		25: victory_condition
+		26: array_of_trappers
+		34: flybots_tp
+		38: chech_how_is_all_players_array
+		39: PLAYER_LEFT_RECREATE_ARRAY
+		40: array_with_players_that_started
+		41: number_of_players_that_voted
+		42: array_with_players_that_voted
+		44: secondary_fire_off
+		45: primary_fire_off
+		46: ability_2_off
+		47: ability_1_off
+		48: the_hero_that_was_chosen
+		49: host_is_in_hero_change_ring
+		50: host_dont_want_to_change_hero
+		51: wait_destroy_action_before_in_wo
+		52: size_of_text_above_orbs
+		53: hero_has_been_chosen
+		55: BOT_HIT_BY_RAY
+		57: trigger_on_countdown_slot_1_busy
+		58: wait_destroy_action_before_effec
+		59: record_position_for_untrapment
+		66: current_phase
+		67: countdown_ended
+		68: freeze_time_and_dmg_in_fall
+		69: UNTRAP_TIME_OVERHEAD
+		71: T
+		72: J
+
+	player:
+		3: Damage_total
+		5: avarage_damage
+		6: damage_goal
+		8: damage_total_defuse_squad_player
+		9: TIME_ELAPSE_FOR_MEDIA_CALC
+		10: AVOID_RESTART_OF_MEDIA_RULE
+		12: damage_to_calculate_media
+		13: player_turn_to_trigger_not_used
+		15: O
+		18: START_TIME_FOR_MEDIA_0NCE
+		19: disallow_player_to_initiate_blas
+		20: player_is_on_trigger_queue
+		21: player_is_the_trigger
+		22: goal_reached
+		26: static_penalty_applied
+		27: player_stopped_for_04_seconds
+		28: player_voted_for_hero_change
+		29: times_difused
+		30: times_wave_released
+		31: timed_dead
+		32: trapper_victim_of_the_bot
+}
+
+rule("skip assembling")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Is Assembling Heroes == True;
+	}
+
+	actions
+	{
+		Set Match Time(17);
+		disabled Create HUD Text(All Players(All Teams), Custom String(
+			"on the beginning of the match, the host may communicate Aknowledge to disable dmg goal and Ultimate status to disable ultimate.",
+			Null, Null, Null), Null, Null, Left, 0, Orange, White, White, Visible To and String, Default Visibility);
+		disabled Big Message(All Players(All Teams), Custom String(
+			"On the beginning of the match, the host may communicate Aknowledge to disable dmg goal and Ultimate status to disable ultimate.",
+			Null, Null, Null));
+	}
+}
+
+rule("skip set up")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Is In Setup == True;
+	}
+
+	actions
+	{
+		Set Match Time(0);
+		disabled Create Dummy Bot(Hero(Ana), Team 2, 1, Random Value In Array(Global Variable(Array_of_vectors_volskaya)), Random Value In Array(
+			Global Variable(Array_of_vectors_volskaya)));
+	}
+}
+
+rule("media")
+{
+	event
+	{
+		Player Dealt Damage;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Has Spawned(Event Player) == True;
+		Player Variable(Event Player, AVOID_RESTART_OF_MEDIA_RULE) == 0;
+		Global Variable(all_dmg_and_time_counts_frozen) == False;
+	}
+
+	actions
+	{
+		Wait(0.500, Ignore Condition);
+		Set Player Variable(Event Player, avarage_damage, Divide(Player Variable(Event Player, damage_to_calculate_media), Player Variable(
+			Event Player, TIME_ELAPSE_FOR_MEDIA_CALC)));
+		Set Player Variable(Event Player, AVOID_RESTART_OF_MEDIA_RULE, 1);
+		Loop;
+		disabled Set Player Variable(Event Player, avarage_damage, Divide(Subtract(Player Variable(Event Player, Damage_total), Player Variable(
+			Event Player, E)), 60));
+		disabled Set Player Variable(Event Player, E, Player Variable(Event Player, Damage_total));
+		disabled Loop;
+		disabled Set Global Variable(total_time_elapsed_without_assem, Subtract(Total Time Elapsed, 12));
+		disabled Set Player Variable(Event Player, avarage_damage, Divide(Player Variable(Event Player, Damage_total), Global Variable(
+			total_time_elapsed_without_assem)));
+	}
+}
+
+rule("hud")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+		Global Variable(wait_destroy_action_before_hud) == 1;
+		Global Variable(ROUND_STARTED) == 1;
+	}
+
+	actions
+	{
+		disabled Create HUD Text(All Players(Team 1), Custom String("Total dmg and damgage/min", Null, Null, Null), Null, Null, Left, 0, White,
+			White, White, String, Default Visibility);
+		disabled Create HUD Text(All Players(Team 1), All Players(Team 1), Player Variable(All Players(Team 1), Damage_total), Player Variable(
+			All Players(Team 1), avarage_damage), Left, Null, Green, Red, Yellow, String, Default Visibility);
+		Create HUD Text(All Players(Team 1), Custom String("{0}/{1} dps: {2}", Player Variable(Event Player, Damage_total),
+			Player Variable(Event Player, damage_goal), Player Variable(Event Player, avarage_damage)), Custom String("{2}", Null, Null,
+			Custom String("{2}/{1}", Null, Player Variable(Event Player, TIME_ELAPSE_FOR_MEDIA_CALC), Player Variable(Event Player,
+			damage_to_calculate_media))), Custom String("{0} {1}/{2}", Event Player, Player Variable(Event Player, times_wave_released),
+			Custom String("{0}/{1}", Player Variable(Event Player, timed_dead), Player Variable(Event Player, times_difused), Null)),
+			Right, 0, Aqua, Green, Yellow, Visible To and String, Visible Always);
+		disabled Create In-World Text(All Players(All Teams), Custom String("test", Null, Null, Null), Players In Slot(1, Team 2), 100,
+			Clip Against Surfaces, Visible To Position and String, White, Default Visibility);
+	}
+}
+
+rule("damage count (blast trigger damage)")
+{
+	event
+	{
+		Player Dealt Damage;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Global Variable(all_dmg_and_time_counts_frozen) == False;
+		Global Variable(freeze_time_and_dmg_in_fall) == False;
+	}
+
+	actions
+	{
+		Modify Player Variable(Event Player, Damage_total, Add, Event Damage);
+	}
+}
+
+rule("ultimate cost")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Is Using Ultimate(Event Player) == True;
+		Is Dead(Players In Slot(1, Team 2)) == False;
+	}
+
+	actions
+	{
+		Modify Player Variable(Event Player, damage_goal, Add, 8);
+		Small Message(Event Player, Custom String("Ultimate cost: damage goal  8", Null, Null, Null));
+	}
+}
+
+rule("match time")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+	}
+
+	actions
+	{
+		Set Match Time(3600);
+		disabled Big Message(All Players(All Teams), Custom String("Deal 500 dmg before your allies to win.", Null, Null, Null));
+		disabled Wait(15.250, Ignore Condition);
+		disabled Create HUD Text(All Players(All Teams), Custom String("Deal 500 dmg before your allies to win.", Null, Null, Null), Null, Null,
+			Top, 0, Green, White, White, Visible To and String, Default Visibility);
+		disabled Wait(7.250, Ignore Condition);
+		disabled Destroy HUD Text(Last Text ID);
+	}
+}
+
+rule("trigger condition")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Global Variable(victory_condition) == 0;
+		Global Variable(TURN_VICTORY_CONDITION_ON_OFF) == False;
+		Player Variable(Event Player, disallow_player_to_initiate_blas) == False;
+		Global Variable(defused) == False;
+		Player Variable(Event Player, goal_reached) == True;
+		"start victory condition when all player deal dmg"
+		disabled Player Variable(All Players(Team 1), START_TIME_FOR_MEDIA_0NCE) == True;
+		Number of Players(Team 1) > 1;
+		disabled Compare(Global Variable(array_with_players_that_started), ==, All Players(Team 1)) == True;
+		Global Variable(ROUND_STARTED) == 1;
+		Global Variable(countdown_ended) == False;
+		Global Variable(array_with_players_that_started) == All Players(Team 1);
+	}
+
+	actions
+	{
+		Wait(0.100, Abort When False);
+		Set Global Variable(victory_condition, 1);
+		Set Player Variable(Event Player, player_is_on_trigger_queue, False);
+		Set Player Variable(Event Player, player_is_the_trigger, True);
+		Wait(0.010, Ignore Condition);
+		Set Global Variable(countdown_time, 59.900);
+		Wait(0.100, Ignore Condition);
+		Chase Global Variable At Rate(countdown_time, 0, 1, None);
+		Set Global Variable(wait_destroy_action_before_hud, 0);
+		Wait(0.100, Ignore Condition);
+		Destroy All HUD Text;
+		Wait(0.100, Ignore Condition);
+		Set Global Variable(wait_destroy_action_before_hud, 1);
+		disabled Create HUD Text(All Players(All Teams), Custom String("Time Remaining to the blast: {0}", Global Variable(countdown_time), Null,
+			Null), Null, Null, Top, 0, Purple, White, White, Visible To and String, Default Visibility);
+		Wait(0.100, Ignore Condition);
+		disabled Set Player Variable(Event Player, O, True);
+		Big Message(All Players(All Teams), Custom String("{0} trggered the Insanity Wave!", Event Player, Null, Null));
+		disabled Go To Assemble Heroes;
+		disabled Wait(0.100, Ignore Condition);
+		disabled Create HUD Text(All Players(All Teams), Event Player, Custom String("Won", Null, Null, Null), Custom String(
+			"Next round starts in 20 seconds.", Null, Null, Null), Top, 0, White, Green, White, Visible To and String, Default Visibility);
+		disabled Destroy HUD Text(Last Text ID);
+		disabled Wait(0.250, Ignore Condition);
+		disabled Set Player Variable(All Players(All Teams), player_turn_to_trigger_not_used, False);
+		Set Player Variable(Event Player, goal_reached, False);
+		Set Global Variable(array_with_the_trigger_player, Append To Array(Empty Array, Event Player));
+		Create Effect(All Players(All Teams), Energy Sound, Orange, Event Player, 10000, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Sparkles, Orange, Event Player, 2, Visible To Position and Radius);
+	}
+}
+
+rule("Move bot (large movement)")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	conditions
+	{
+		Has Spawned(Event Player) == True;
+		Speed Of(Event Player) >= 4.900;
+	}
+
+	actions
+	{
+		Skip If(Compare(Global Variable(bot_hit_the_wall), ==, 1), 1);
+		Wait(0.300, Ignore Condition);
+		Wait(Random Real(0, 1), Abort When False);
+		disabled Stop Throttle In Direction(Event Player);
+		disabled Start Accelerating(Event Player, Vector(Random Real(-1.000, 1), 0, Random Real(-1.000, 1)), 100, 20, To World, None);
+		Start Throttle In Direction(Event Player, Vector(Random Real(-1.000, 1), 0, Random Real(-1.000, 1)), 20, To World,
+			Replace existing throttle, Direction and Magnitude);
+		Set Global Variable(bot_hit_the_wall, False);
+		Loop If Condition Is True;
+		disabled Start Accelerating(Players In Slot(1, Team 2), Vector(Random Real(-1.000, 1), 0, Random Real(-1.000, 1)), 100, 20, To Player,
+			Direction Rate and Max Speed);
+	}
+}
+
+rule("unstuck primeiro quadrante")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	conditions
+	{
+		Has Spawned(Event Player) == True;
+		Speed Of(Event Player) < 4.900;
+		X Component Of(Throttle Of(Event Player)) > 0;
+		Z Component Of(Throttle Of(Event Player)) > 0;
+	}
+
+	actions
+	{
+		Wait(0.050, Abort When False);
+		disabled Start Accelerating(Event Player, Vector(1, 0, 1), 100, 20, To World, None);
+		disabled Start Throttle In Direction(Event Player, Vector(1, 0, 0), 20, To World, Replace existing throttle, None);
+		Start Throttle In Direction(Event Player, Vector(Random Real(-1.000, 0), 0, Random Real(-1.000, 0)), 20, To World,
+			Replace existing throttle, Direction and Magnitude);
+		Set Move Speed(Players In Slot(1, Team 2), 100);
+		disabled Skip If(Compare(Global Variable(survive_after_untrapment), ==, True), 1);
+		Set Global Variable(bot_hit_the_wall, True);
+		disabled Modify Global Variable(total_unstucks_count, Add, 1);
+		disabled Wait(0.001, Ignore Condition);
+		disabled Press Button(Players In Slot(1, Team 2), Ability 2);
+		Loop If Condition Is True;
+	}
+}
+
+rule("Face random direction")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	conditions
+	{
+		Has Spawned(Event Player) == True;
+		Global Variable(lock_facing_on_trapper_player) == False;
+	}
+
+	actions
+	{
+		disabled Start Facing(Event Player, Vector(Random Real(-1.000, 1), 0, Random Real(-1.000, 1)), 100, To World, None);
+		Set Facing(Event Player, Vector(Random Real(-1.000, 1), 0, Random Real(-1.000, 1)), To World);
+		Wait(Random Real(0, 2), Abort When False);
+		Loop;
+	}
+}
+
+rule("Bot location icon")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	conditions
+	{
+		disabled Vertical Speed Of(Event Player) > 0.200;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Nearest Walkable Position(Event Player));
+		disabled Create Beam Effect(Event Player, Good Beam, Event Player, Players In Slot(1, Team 2), Red, Visible To Position and Radius);
+		disabled Create Effect(All Players(All Teams), Ring, Red, Players In Slot(1, Team 2), 1, Visible To Position and Radius);
+		Create Icon(All Players(All Teams), Players In Slot(1, Team 2), Arrow: Down, Visible To and Position, Red, True);
+	}
+}
+
+rule("overhead stats")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		disabled Is Firing Primary(Event Player) == True;
+		Global Variable(wait_destroy_action_before_in_wo) == True;
+	}
+
+	actions
+	{
+		Create In-World Text(Event Player, Custom String("  {0}/{1}  DPS: {2}", Player Variable(Event Player, Damage_total),
+			Player Variable(Event Player, damage_goal), Custom String("{0}  {2}  {1}", Player Variable(Event Player, avarage_damage),
+			Global Variable(UNTRAP_TIME_OVERHEAD), String("{0} / {1}", Player Variable(Event Player, damage_total_defuse_squad_player),
+			Multiply(Player Variable(Global Variable(array_with_the_trigger_player), avarage_damage), 60), Null))), Players In Slot(1,
+			Team 2), 2.500, Do Not Clip, Visible To Position and String, Yellow, Default Visibility);
+	}
+}
+
+rule("spawn player")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Is In Spawn Room(Event Player) == True;
+	}
+
+	actions
+	{
+		Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		disabled Teleport(Event Player, Vector(-33.521, -2.732, 114.731));
+	}
+}
+
+rule("skip potg while afk")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Point Capture Percentage >= 99.500;
+	}
+
+	actions
+	{
+		Go To Assemble Heroes;
+	}
+}
+
+rule("restart variables (occurs after choose a hero)")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == True;
+	}
+
+	actions
+	{
+		Chase Global Variable At Rate(count_down_to_round_start, 0, 1, Destination and Rate);
+		Set Global Variable(count_down_to_round_start, 2);
+		Set Global Variable(ROUND_STARTED, 1);
+		Skip If(Compare(Number of Players(Team 1), <, 4), 3);
+		Modify Global Variable(count_down_to_round_start, Add, 8);
+		Big Message(All Players(All Teams), Custom String("Giving time for players to load heros. Game starting in 8 seconds", Null, Null,
+			Null));
+		Wait(8, Ignore Condition);
+		Set Player Variable(All Players(All Teams), player_is_on_trigger_queue, False);
+		Set Player Variable(All Players(All Teams), goal_reached, False);
+		Set Global Variable(array_with_trigger_in_order, Empty Array);
+		Set Player Variable(All Players(All Teams), player_is_the_trigger, False);
+		Set Global Variable(victory_condition, 0);
+		disabled Set Global Variable(TURN_VICTORY_CONDITION_ON_OFF, 1);
+		Wait(0.100, Ignore Condition);
+		Set Player Variable(All Players(All Teams), AVOID_RESTART_OF_MEDIA_RULE, 0);
+		Disable Built-In Game Mode Announcer;
+		disabled Disable Built-In Game Mode Completion;
+		Disable Built-In Game Mode Music;
+		disabled Disable Built-In Game Mode Scoring;
+		disabled Set Match Time(3600);
+		Set Player Variable(All Players(All Teams), damage_total_defuse_squad_player, 0);
+		disabled Skip If(Compare(Global Variable(not_first_round), ==, False), 3);
+		disabled Go To Assemble Heroes;
+		disabled Wait(0.100, Ignore Condition);
+		disabled Set Match Time(5);
+		Wait(0.100, Ignore Condition);
+		Set Player Variable(All Players(All Teams), damage_goal, 500);
+		Set Player Variable(All Players(All Teams), damage_to_calculate_media, 0);
+		Set Player Variable(All Players(All Teams), avarage_damage, 0);
+		Set Player Variable(All Players(All Teams), Damage_total, 0);
+		Set Match Time(3599);
+		Set Global Variable(countdown_ended, False);
+		Wait(1.100, Ignore Condition);
+		disabled Respawn(Players In Slot(1, Team 2));
+		Wait(0.250, Ignore Condition);
+		Set Player Variable(All Players(All Teams), START_TIME_FOR_MEDIA_0NCE, False);
+		Stop Chasing Player Variable(All Players(All Teams), TIME_ELAPSE_FOR_MEDIA_CALC);
+		Destroy All Dummy Bots;
+		Wait(0.250, Ignore Condition);
+		Set Player Variable(All Players(All Teams), TIME_ELAPSE_FOR_MEDIA_CALC, 0);
+		Set Global Variable(wait_destroy_action_before_effec, True);
+		Set Global Variable(wait_destroy_action_before_in_wo, False);
+		Destroy All In-World Text;
+		Wait(0.100, Ignore Condition);
+		Set Global Variable(wait_destroy_action_before_in_wo, True);
+		Set Global Variable(host_dont_want_to_change_hero, True);
+		Set Player Variable(All Players(Team 1), player_voted_for_hero_change, False);
+		Set Ultimate Charge(All Players(Team 1), 0);
+		Set Global Variable(array_of_trappers, Empty Array);
+		Set Global Variable(lock_facing_on_trapper_player, False);
+		Clear Status(All Players(Team 2), Phased Out);
+		Set Global Variable(wait_destroy_action_before_hud, 0);
+		Wait(0.100, Ignore Condition);
+		Destroy All HUD Text;
+		Wait(0.100, Ignore Condition);
+		Set Global Variable(wait_destroy_action_before_hud, 1);
+	}
+}
+
+rule("Ultimate off")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(Ultimate_on_off) == False;
+		Is Communicating(Host Player, Ultimate Status) == True;
+		disabled Match Time >= 3595;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Global Variable(ROUND_STARTED) == 0;
+	}
+
+	actions
+	{
+		Disallow Button(All Players(All Teams), Ultimate);
+		Set Global Variable(Ultimate_on_off, True);
+		disabled Big Message(All Players(All Teams), Custom String("Ultimate disabled", Null, Null, Null));
+		Play Effect(All Players(All Teams), Bad Pickup Effect, White, Objective Position(0), 1000);
+		Play Effect(All Players(All Teams), Debuff Impact Sound, White, Objective Position(0), 1000);
+		disabled Destroy HUD Text(Last Text ID);
+		Create HUD Text(All Players(All Teams), Custom String("Ultimate disabled", Null, Null, Null), Null, Null, Top, 0, Yellow, White,
+			White, Visible To and String, Default Visibility);
+	}
+}
+
+rule("unstuck segundo quadrante")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	conditions
+	{
+		Has Spawned(Event Player) == True;
+		Speed Of(Event Player) < 4.900;
+		X Component Of(Throttle Of(Event Player)) < 0;
+		Z Component Of(Throttle Of(Event Player)) >= 0;
+	}
+
+	actions
+	{
+		Wait(0.050, Abort When False);
+		disabled Start Accelerating(Event Player, Vector(1, 0, 1), 100, 20, To World, None);
+		disabled Start Throttle In Direction(Event Player, Vector(1, 0, 0), 20, To World, Replace existing throttle, None);
+		Start Throttle In Direction(Event Player, Vector(Random Real(0, 1), 0, Random Real(-1.000, 0)), 20, To World,
+			Replace existing throttle, Direction and Magnitude);
+		Set Move Speed(Players In Slot(1, Team 2), 100);
+		disabled Skip If(Compare(Global Variable(survive_after_untrapment), ==, True), 1);
+		Set Global Variable(bot_hit_the_wall, True);
+		disabled Modify Global Variable(total_unstucks_count, Add, 1);
+		disabled Press Button(Players In Slot(1, Team 2), Ability 2);
+		Loop If Condition Is True;
+	}
+}
+
+rule("unstuck terceiro quadrante")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	conditions
+	{
+		Has Spawned(Event Player) == True;
+		Speed Of(Event Player) < 4.900;
+		X Component Of(Throttle Of(Event Player)) < 0;
+		Z Component Of(Throttle Of(Event Player)) < 0;
+	}
+
+	actions
+	{
+		Wait(0.050, Abort When False);
+		disabled Start Accelerating(Event Player, Vector(1, 0, 1), 100, 20, To World, None);
+		disabled Start Throttle In Direction(Event Player, Vector(1, 0, 0), 20, To World, Replace existing throttle, None);
+		Start Throttle In Direction(Event Player, Vector(Random Real(0, 1), 0, Random Real(0, 1)), 20, To World, Replace existing throttle,
+			Direction and Magnitude);
+		Set Move Speed(Players In Slot(1, Team 2), 100);
+		disabled Skip If(Compare(Global Variable(survive_after_untrapment), ==, True), 1);
+		Set Global Variable(bot_hit_the_wall, True);
+		disabled Modify Global Variable(total_unstucks_count, Add, 1);
+		disabled Press Button(Players In Slot(1, Team 2), Ability 2);
+		disabled Wait(0.001, Ignore Condition);
+		Loop If Condition Is True;
+	}
+}
+
+rule("unstuck quarto quadrante")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	conditions
+	{
+		Has Spawned(Event Player) == True;
+		Speed Of(Event Player) < 4.900;
+		X Component Of(Throttle Of(Event Player)) >= 0;
+		Z Component Of(Throttle Of(Event Player)) < 0;
+	}
+
+	actions
+	{
+		Wait(0.050, Abort When False);
+		disabled Start Accelerating(Event Player, Vector(1, 0, 1), 100, 20, To World, None);
+		disabled Start Throttle In Direction(Event Player, Vector(1, 0, 0), 20, To World, Replace existing throttle, None);
+		Start Throttle In Direction(Event Player, Vector(Random Real(-1.000, 0), 0, Random Real(0, 1)), 20, To World,
+			Replace existing throttle, Direction and Magnitude);
+		Set Move Speed(Players In Slot(1, Team 2), 100);
+		disabled Skip If(Compare(Global Variable(survive_after_untrapment), ==, True), 1);
+		Set Global Variable(bot_hit_the_wall, True);
+		disabled Press Button(Players In Slot(1, Team 2), Ability 2);
+		disabled Modify Global Variable(total_unstucks_count, Add, 1);
+		disabled Wait(0.001, Ignore Condition);
+		disabled Set Global Variable(bot_hit_the_wall, False);
+		Loop If Condition Is True;
+	}
+}
+
+rule("i SAID ULTIMATE OFF")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+		Global Variable(Ultimate_on_off) == True;
+	}
+
+	actions
+	{
+		Wait(0.400, Abort When False);
+		Disallow Button(Event Player, Ultimate);
+		disabled Wait(16.250, Ignore Condition);
+		disabled Destroy HUD Text(Last Text ID);
+		disabled Create HUD Text(All Players(All Teams), Custom String("Ultimate disabled", Null, Null, Null), Null, Null, Top, 0, Yellow, White,
+			White, Visible To and String, Default Visibility);
+	}
+}
+
+rule("DISABLE VICTORY CONDITION")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Is Communicating(Host Player, Acknowledge) == True;
+		Global Variable(TURN_VICTORY_CONDITION_ON_OFF) == False;
+		disabled Match Time >= 3595;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Global Variable(ROUND_STARTED) == 0;
+	}
+
+	actions
+	{
+		Set Global Variable(TURN_VICTORY_CONDITION_ON_OFF, True);
+		Play Effect(All Players(All Teams), Bad Pickup Effect, White, Objective Position(0), 1000);
+		Play Effect(All Players(All Teams), Debuff Impact Sound, White, Objective Position(0), 1000);
+		disabled Create HUD Text(All Players(All Teams), Custom String("Victory condition disabled", Null, Null, Null), Null, Null, Top, 0, Yellow,
+			White, White, Visible To and String, Default Visibility);
+		Wait(10, Ignore Condition);
+		Create HUD Text(All Players(All Teams), Custom String(
+			"After the first 5 seconds, host may Communicate aknowledge again to activate dmg goal", Null, Null, Null), Null, Null, Top,
+			10, Orange, White, White, Visible To and String, Default Visibility);
+		disabled Destroy HUD Text(Last Text ID);
+	}
+}
+
+rule("enable victory condition")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Is Communicating(Host Player, Acknowledge) == True;
+		Global Variable(TURN_VICTORY_CONDITION_ON_OFF) == True;
+		Match Time < 3595;
+	}
+
+	actions
+	{
+		Set Global Variable(TURN_VICTORY_CONDITION_ON_OFF, False);
+		Play Effect(All Players(All Teams), Bad Pickup Effect, White, Objective Position(0), 1000);
+		Play Effect(All Players(All Teams), Debuff Impact Sound, White, Objective Position(0), 1000);
+		Create HUD Text(All Players(All Teams), Custom String("Victory condition enabled", Null, Null, Null), Null, Null, Top, 0, Yellow,
+			White, White, Visible To and String, Default Visibility);
+		Wait(10, Ignore Condition);
+		Destroy HUD Text(Last Text ID);
+	}
+}
+
+rule("instructions after spawn (objective)")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+	}
+
+	actions
+	{
+		Wait(16.250, Ignore Condition);
+		Big Message(Event Player, Custom String("Reach your damage goal before your allies to trigger the countdown to the Insanity Wave.",
+			Null, Null, Null));
+		disabled Create HUD Text(Event Player, Custom String("Reach your damage goal before your allies to trigger the countdown to explosion.",
+			Null, Null, Null), Null, Null, Top, 0, Green, White, White, Visible To and String, Default Visibility);
+		disabled Wait(12.250, Ignore Condition);
+		disabled Destroy HUD Text(Last Text ID);
+		disabled Big Message(Event Player, Custom String("Reach your damage goal before your allies to win.", Null, Null, Null));
+	}
+}
+
+rule("instruction after spawn (change heroes)")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+		Global Variable(ROUND_STARTED) == 1;
+	}
+
+	actions
+	{
+		disabled Create HUD Text(Event Player, Custom String("", Null, Null, Null), Null, Custom String(
+			"Host may communicate acknowledge and/or ult status to disable vicotory condition or ult and/or respectively at the beggining.",
+			Null, Null, Null), Left, 0, White, White, White, Visible To and String, Default Visibility);
+		disabled Set Objective Description(All Players(All Teams), Custom String(
+			"Host may communicate acknowledge and/or ult status to disable vicotory condition an/or ult respectively at the beggining.",
+			Null, Null, Null), Visible To and String);
+		Set Objective Description(All Players(All Teams), Custom String("The team can change heroes by crouching on the specified area.",
+			Null, Null, Null), Visible To and String);
+	}
+}
+
+rule("set dmg gold when joining")
+{
+	event
+	{
+		Player Joined Match;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		disabled Is In Spawn Room(Event Player) == True;
+	}
+
+	actions
+	{
+		Set Player Variable(Event Player, damage_goal, 500);
+	}
+}
+
+disabled rule("prevent fall dmg")
+{
+	event
+	{
+		Player Dealt Damage;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Event Damage > 100;
+	}
+
+	actions
+	{
+		Modify Player Variable(Event Player, Damage_total, Subtract, Event Damage);
+		disabled Wait(0.100, Abort When False);
+		disabled Loop If Condition Is True;
+		Skip If(Compare(Global Variable(victory_condition), ==, 0), 1);
+		Modify Player Variable(Event Player, damage_total_defuse_squad_player, Subtract, Event Damage);
+		Modify Player Variable(Event Player, damage_to_calculate_media, Subtract, Event Damage);
+	}
+}
+
+rule("Insanity Wave trigger left, player left without enter or voting player left")
+{
+	event
+	{
+		Player Left Match;
+		All;
+		All;
+	}
+
+	actions
+	{
+		"avoid bug when trigger player leave"
+		Skip If(Compare(Global Variable(victory_condition), ==, 0), 3);
+		Skip If(Compare(Global Variable(array_with_the_trigger_player), !=, Empty Array), 2);
+		Big Message(All Players(All Teams), Custom String("The Blast trigger {0} left.", Event Player, Null, Null));
+		Set Global Variable(defused, True);
+		Set Global Variable(array_with_players_that_started, Remove From Array(Global Variable(array_with_players_that_started),
+			Event Player));
+		Set Global Variable(array_with_players_that_voted, Remove From Array(Global Variable(array_with_players_that_voted),
+			Event Player));
+		Set Global Variable(array_with_players_that_voted, Sorted Array(Global Variable(array_with_players_that_voted),
+			Index Of Array Value(All Players(Team 1), Current Array Element)));
+		Set Global Variable(array_with_players_that_started, Sorted Array(Global Variable(array_with_players_that_started),
+			Index Of Array Value(All Players(Team 1), Current Array Element)));
+		Set Global Variable(chech_how_is_all_players_array, All Players(Team 1));
+		disabled Set Global Variable(PLAYER_LEFT_RECREATE_ARRAY, True);
+		disabled Wait(0.250, Ignore Condition);
+		disabled Set Global Variable(PLAYER_LEFT_RECREATE_ARRAY, False);
+		disabled Big Message(All Players(All Teams), Custom String("The player {0} that the game was waiting before initite the countdown left.",
+			Event Player, Null, Null));
+		disabled Create Effect(All Players(All Teams), Energy Sound, Orange, Players In Slot(1, Team 2), 10000, Visible To Position and Radius);
+		disabled Create Effect(All Players(All Teams), Sparkles, Orange, Players In Slot(1, Team 2), 2, Visible To Position and Radius);
+		disabled Create Effect(All Players(All Teams), Sphere, Yellow, Players In Slot(1, Team 2), 2, Visible To Position and Radius);
+		disabled Create Effect(All Players(All Teams), Light Shaft, White, Players In Slot(1, Team 2), 1, Visible To Position and Radius);
+		disabled Create Effect(All Players(All Teams), Sparkles Sound, White, Players In Slot(10, Team 2), 10000, Visible To Position and Radius);
+		disabled Wait(5, Ignore Condition);
+		disabled Play Effect(All Players(All Teams), Buff Explosion Sound, White, Players In Slot(1, Team 2), 9999);
+		disabled Play Effect(All Players(All Teams), Bad Explosion, Yellow, Players In Slot(1, Team 2), 10000);
+		disabled Damage(All Players(Team 1), Players In Slot(1, Team 2), 10000);
+		disabled Damage(All Players(All Teams), Null, 10000);
+		disabled Set Global Variable(ROUND_STARTED, 0);
+		disabled Set Global Variable(not_first_round, True);
+		disabled Wait(3, Ignore Condition);
+		disabled Destroy All Effects;
+		disabled Set Player Variable(All Players(Team 1), Damage_total, 0);
+		disabled Go To Assemble Heroes;
+		disabled Set Global Variable(victory_condition, 0);
+	}
+}
+
+rule("heal bot")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	actions
+	{
+		Heal(Event Player, Event Player, 75);
+		Wait(1, Ignore Condition);
+		Loop;
+	}
+}
+
+rule("survive after untrapment, restart big message variable")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	conditions
+	{
+		Is In Spawn Room(Event Player) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(survive_after_untrapment, True);
+		Wait(1, Ignore Condition);
+		Set Global Variable(lock_facing_on_trapper_player, False);
+		Set Global Variable(survive_after_untrapment, False);
+	}
+}
+
+rule("refund damage when bot dies during ult")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Is Using Ultimate(Event Player) == True;
+		Is Dead(Players In Slot(1, Team 2)) == True;
+	}
+
+	actions
+	{
+		Modify Player Variable(Event Player, damage_goal, Subtract, 8);
+		Small Message(Event Player, Custom String("Bot died during ult: Damage Goal refund  8", Null, Null, Null));
+	}
+}
+
+rule("set defuse squad")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Player Variable(Event Player, player_is_the_trigger) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(array_of_team_1_to_defuse, Remove From Array(All Players(Team 1), Event Player));
+		disabled Wait(0.100, Ignore Condition);
+		disabled Set Global Variable(sum_of_damage_total_to_defuse, Add(Player Variable(Array Slice(Global Variable(array_of_team_1_to_defuse), 0,
+			4), damage_total_defuse_squad_player), 0));
+	}
+}
+
+rule("defuse")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Player Variable(Event Player, damage_total_defuse_squad_player) > Multiply(Player Variable(Global Variable(
+			array_with_the_trigger_player), avarage_damage), 60);
+		Player Variable(Event Player, player_is_the_trigger) == False;
+		Global Variable(victory_condition) == 1;
+		Global Variable(defused) == False;
+		Global Variable(countdown_ended) == False;
+	}
+
+	actions
+	{
+		Wait(0.001, Abort When False);
+		Big Message(All Players(All Teams), Custom String("Insanity Wave aborted by {0}.", Event Player, Null, Null));
+		Set Global Variable(defused, True);
+		Modify Player Variable(Event Player, times_difused, Add, 1);
+	}
+}
+
+rule("defuse squad member dmg")
+{
+	event
+	{
+		Player Dealt Damage;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Global Variable(victory_condition) == 1;
+		Global Variable(all_dmg_and_time_counts_frozen) == False;
+		Global Variable(freeze_time_and_dmg_in_fall) == False;
+		disabled Array Contains(Remove From Array(All Players(All Teams), Value In Array(Global Variable(array_with_the_trigger_player), 0)),
+			Event Player) == True;
+		Array Contains(Filtered Array(All Players(Team 1), Compare(Player Variable(Current Array Element, player_is_the_trigger), ==,
+			False)), Event Player) == True;
+	}
+
+	actions
+	{
+		Modify Player Variable(Event Player, damage_total_defuse_squad_player, Add, Event Damage);
+	}
+}
+
+rule("specify the trigger and show the hud to it")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+		Global Variable(victory_condition) == 1;
+		Player Variable(Event Player, player_is_the_trigger) == True;
+		Global Variable(defused) == False;
+		Global Variable(wait_destroy_action_before_hud) == 1;
+	}
+
+	actions
+	{
+		disabled Create HUD Text(All Players(All Teams), Custom String("Current damage: {1}", Player Variable(Event Player,
+			damage_total_defuse_squad_player), Null, Null), Null, Null, Top, 0, Red, White, White, Visible To and String,
+			Default Visibility);
+		Set Global Variable(array_with_the_trigger_player, Append To Array(Empty Array, Event Player));
+		Create HUD Text(Event Player, Custom String("Your Insanity Wave abort dmg (DPSx60): {0}", Multiply(Player Variable(Event Player,
+			avarage_damage), 60), Player Variable(Event Player, avarage_damage), Null), Null, Null, Top, 4, Yellow, White, White,
+			Visible To and String, Visible Always);
+	}
+}
+
+rule("countdown damage hud")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+		Global Variable(victory_condition) == 1;
+		Player Variable(Global Variable(array_of_team_1_to_defuse), player_is_the_trigger) == False;
+		Player Variable(Event Player, player_is_the_trigger) == False;
+		Global Variable(wait_destroy_action_before_hud) == 1;
+	}
+
+	actions
+	{
+		disabled Create HUD Text(All Players(All Teams), Custom String("Current damage: {1}", Multiply(Player Variable(Event Player,
+			avarage_damage), 25), Null, Null), Null, Null, Top, 0, Red, White, White, Visible To and String, Default Visibility);
+		Wait(0.100, Ignore Condition);
+		Create HUD Text(Event Player, Custom String("Deal {2}'s DPSx60 as damage to abort his wave.", Player Variable(Event Player,
+			damage_total_defuse_squad_player), Multiply(Player Variable(Global Variable(array_with_the_trigger_player), avarage_damage),
+			60), Global Variable(array_with_the_trigger_player)), Null, Null, Top, 3, Green, White, White, Visible To and String,
+			Visible Always);
+	}
+}
+
+rule("count damage to calculate media")
+{
+	event
+	{
+		Player Dealt Damage;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Global Variable(all_dmg_and_time_counts_frozen) == False;
+		Global Variable(freeze_time_and_dmg_in_fall) == False;
+	}
+
+	actions
+	{
+		Modify Player Variable(Event Player, damage_to_calculate_media, Add, Event Damage);
+	}
+}
+
+rule("triger queue on countdown")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Global Variable(victory_condition) == 1;
+		Player Variable(Event Player, Damage_total) >= Player Variable(Event Player, damage_goal);
+		disabled Global Variable(trigger_on_countdown_slot_1_busy) == False;
+		disabled Player Variable(Event Player, player_is_the_trigger) == False;
+		disabled Global Variable(trigger_on_countdown_slot_1_busy) == True;
+		disabled Global Variable(wait_destroy_action_before_effec) == True;
+		Compare(Global Variable(array_with_players_that_started), ==, All Players(Team 1)) == True;
+	}
+
+	actions
+	{
+		Skip If(Compare(Global Variable(array_with_trigger_in_order), !=, Empty Array), 1);
+		Set Player Variable(All Players(Team 1), disallow_player_to_initiate_blas, True);
+		disabled Set Global Variable(trigger_on_countdown_slot_1_busy, True);
+		disabled Set Player Variable(Event Player, player_turn_to_trigger_not_used, True);
+		Set Global Variable(array_with_trigger_in_order, Append To Array(Global Variable(array_with_trigger_in_order), Event Player));
+		Create Effect(All Players(All Teams), Good Aura Sound, Orange, Event Player, 10000, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Sparkles, Aqua, Event Player, 2, Visible To Position and Radius);
+		disabled Stop Chasing Player Variable(Event Player, TIME_ELAPSE_FOR_MEDIA_CALC);
+		Set Player Variable(Event Player, player_is_on_trigger_queue, True);
+		Big Message(All Players(All Teams), Custom String("{0} entered on queue to trigger the next blast countdown.", Event Player, Null,
+			Null));
+		Wait(1, Ignore Condition);
+		disabled Small Message(Event Player, Custom String("DPS frozen whlile on queue", Null, Null, Null));
+	}
+}
+
+rule("allow player in queue to trigger the blast")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Compare(Global Variable(array_with_trigger_in_order), ==, Empty Array) == False;
+		Global Variable(defused) == False;
+		Global Variable(victory_condition) == 0;
+		Compare(Global Variable(array_with_players_that_started), ==, All Players(Team 1)) == True;
+	}
+
+	actions
+	{
+		Set Player Variable(Value In Array(Global Variable(array_with_trigger_in_order), 0), disallow_player_to_initiate_blas, False);
+		disabled Wait(0.100, Abort When False);
+		disabled Set Global Variable(trigger_on_countdown_slot_1_busy, True);
+		disabled Set Global Variable(array_with_trigger_in_order, Remove From Array(Global Variable(array_with_trigger_in_order), Array Slice(
+			Global Variable(array_with_trigger_in_order), 0, 1)));
+		Set Player Variable(Value In Array(Global Variable(array_with_trigger_in_order), 0), goal_reached, True);
+		Wait(0.100, Ignore Condition);
+		Set Global Variable(array_with_trigger_in_order, Remove From Array(Global Variable(array_with_trigger_in_order), Value In Array(
+			Global Variable(array_with_trigger_in_order), 0)));
+	}
+}
+
+rule("allow all players to rigger blast if queue is empty")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Compare(Global Variable(array_with_trigger_in_order), ==, Empty Array) == True;
+	}
+
+	actions
+	{
+		Set Player Variable(All Players(All Teams), disallow_player_to_initiate_blas, False);
+	}
+}
+
+rule("raise goal by 500 if player triggers")
+{
+	event
+	{
+		Player Dealt Damage;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Player Variable(Event Player, Damage_total) >= Player Variable(Event Player, damage_goal);
+		Number of Players(Team 1) > 1;
+	}
+
+	actions
+	{
+		Wait(0.100, Ignore Condition);
+		Set Player Variable(Event Player, damage_goal, Add(500, Player Variable(Event Player, damage_goal)));
+	}
+}
+
+rule("actions when Insanity Wave is defused")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(defused) == True;
+	}
+
+	actions
+	{
+		Set Player Variable(Global Variable(array_with_the_trigger_player), damage_to_calculate_media, 0);
+		Set Player Variable(Global Variable(array_with_the_trigger_player), TIME_ELAPSE_FOR_MEDIA_CALC, 0);
+		Set Player Variable(All Players(All Teams), damage_total_defuse_squad_player, 0);
+		Set Player Variable(All Players(All Teams), player_is_the_trigger, False);
+		disabled Skip If(Compare(Global Variable(array_with_trigger_in_order), ==, Empty Array), 1);
+		disabled Set Player Variable(All Players(All Teams), disallow_player_to_initiate_blas, True);
+		Play Effect(All Players(All Teams), Bad Pickup Effect, White, Global Variable(array_with_the_trigger_player), 1);
+		Play Effect(All Players(All Teams), Debuff Impact Sound, Aqua, Global Variable(array_with_the_trigger_player), 10000);
+		Set Global Variable(wait_destroy_action_before_effec, False);
+		Destroy All Effects;
+		Wait(0.100, Ignore Condition);
+		Set Global Variable(wait_destroy_action_before_effec, True);
+		Skip If(Compare(Global Variable(array_with_trigger_in_order), ==, Empty Array), 2);
+		Create Effect(All Players(All Teams), Good Aura Sound, Orange, Global Variable(array_with_trigger_in_order), 10000,
+			Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Sparkles, Aqua, Global Variable(array_with_trigger_in_order), 2,
+			Visible To Position and Radius);
+		Set Global Variable(victory_condition, 0);
+		Set Global Variable(wait_destroy_action_before_hud, 0);
+		Wait(0.100, Ignore Condition);
+		Destroy All HUD Text;
+		Wait(0.100, Ignore Condition);
+		Set Global Variable(wait_destroy_action_before_hud, 1);
+		Wait(0.100, Ignore Condition);
+		Set Global Variable(defused, False);
+	}
+}
+
+rule("START COUNTING TIME FOR MEDIA")
+{
+	event
+	{
+		Player Dealt Damage;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		disabled Players Within Radius(Players In Slot(1, Team 2), 13, All Teams, Surfaces) == True;
+		Player Variable(Event Player, START_TIME_FOR_MEDIA_0NCE) == False;
+	}
+
+	actions
+	{
+		Chase Player Variable At Rate(Event Player, TIME_ELAPSE_FOR_MEDIA_CALC, 10000, 1, Destination and Rate);
+		disabled Set Player Variable(Event Player, avarage_damage, Divide(Subtract(Player Variable(Event Player, Damage_total), Player Variable(
+			Event Player, E)), 60));
+		disabled Set Player Variable(Event Player, E, Player Variable(Event Player, Damage_total));
+		disabled Loop;
+		disabled Set Global Variable(total_time_elapsed_without_assem, Subtract(Total Time Elapsed, 12));
+		disabled Set Player Variable(Event Player, avarage_damage, Divide(Player Variable(Event Player, Damage_total), Global Variable(
+			total_time_elapsed_without_assem)));
+		Set Player Variable(Event Player, START_TIME_FOR_MEDIA_0NCE, True);
+		Set Global Variable(array_with_players_that_started, Append To Array(Global Variable(array_with_players_that_started),
+			Event Player));
+		disabled Wait(0.250, Ignore Condition);
+		Set Global Variable(array_with_players_that_started, Sorted Array(Global Variable(array_with_players_that_started),
+			Index Of Array Value(All Players(Team 1), Current Array Element)));
+		Set Global Variable(chech_how_is_all_players_array, All Players(Team 1));
+	}
+}
+
+rule("countdown time hud")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+		Global Variable(victory_condition) == 1;
+		Global Variable(wait_destroy_action_before_hud) == 1;
+	}
+
+	actions
+	{
+		Create HUD Text(Event Player, Custom String("Countdown to the Insanity Wave: {0}", Global Variable(countdown_time), Null, Null),
+			Null, Null, Top, 5, Orange, White, White, Visible To and String, Visible Always);
+	}
+}
+
+rule("goal signal variable")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Player Variable(Event Player, Damage_total) >= Player Variable(Event Player, damage_goal);
+		Global Variable(array_with_trigger_in_order) == Empty Array;
+	}
+
+	actions
+	{
+		Set Player Variable(Event Player, goal_reached, True);
+	}
+}
+
+rule("queue hud")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 1;
+		All;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+		Global Variable(wait_destroy_action_before_hud) == 1;
+		Player Variable(Event Player, player_is_on_trigger_queue) == True;
+		Global Variable(ROUND_STARTED) == 1;
+	}
+
+	actions
+	{
+		Wait(0.250, Ignore Condition);
+		disabled Create HUD Text(All Players(Team 1), Custom String("Total dmg and damgage/min", Null, Null, Null), Null, Null, Left, 0, White,
+			White, White, String, Default Visibility);
+		disabled Create HUD Text(All Players(Team 1), All Players(Team 1), Player Variable(All Players(Team 1), Damage_total), Player Variable(
+			All Players(Team 1), avarage_damage), Left, Null, Green, Red, Yellow, String, Default Visibility);
+		Create HUD Text(All Players(Team 1), Custom String("{1}: {0}", Event Player, Add(Index Of Array Value(Global Variable(
+			array_with_trigger_in_order), Event Player), 1), Null), Null, Null, Left, 0, Aqua, Yellow, Green, Visible To and String,
+			Visible Always);
+		disabled Create In-World Text(All Players(All Teams), Custom String("test", Null, Null, Null), Players In Slot(1, Team 2), 100,
+			Clip Against Surfaces, Visible To Position and String, White, Default Visibility);
+	}
+}
+
+rule("start moving when stopped")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		Slot 1;
+	}
+
+	conditions
+	{
+		Has Spawned(Event Player) == True;
+		Speed Of(Event Player) < 4.900;
+		X Component Of(Throttle Of(Event Player)) == 0;
+		Z Component Of(Throttle Of(Event Player)) == 0;
+	}
+
+	actions
+	{
+		Wait(0.100, Abort When False);
+		disabled Start Accelerating(Event Player, Vector(1, 0, 1), 100, 20, To World, None);
+		disabled Start Throttle In Direction(Event Player, Vector(1, 0, 0), 20, To World, Replace existing throttle, None);
+		Start Throttle In Direction(Event Player, Vector(Random Real(-1.000, 1), 0, Random Real(-1.000, 1)), 20, To World,
+			Replace existing throttle, Direction and Magnitude);
+		Skip If(Compare(Global Variable(survive_after_untrapment), ==, True), 1);
+		Set Global Variable(bot_hit_the_wall, True);
+		Modify Global Variable(total_unstucks_count, Add, 1);
+		Wait(0.001, Ignore Condition);
+		disabled Press Button(Players In Slot(1, Team 2), Ability 2);
+		Set Global Variable(bot_hit_the_wall, False);
+		Loop If Condition Is True;
+	}
+}
+
+rule("queue hud indicator")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+		Global Variable(wait_destroy_action_before_hud) == 1;
+		Compare(Global Variable(array_with_trigger_in_order), ==, Empty Array) == False;
+		Global Variable(ROUND_STARTED) == 1;
+	}
+
+	actions
+	{
+		Create HUD Text(All Players(All Teams), Custom String("Trigger queue shown above", Null, Null, Null), Null, Null, Left, 1, Purple,
+			White, White, Visible To and String, Visible Always);
+	}
+}
+
+rule("restart all dmg and time counting after reaching the ground")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Y Component Of(Velocity Of(Players In Slot(1, Team 2))) >= -6.000;
+	}
+
+	actions
+	{
+		Wait(1, Abort When False);
+		Set Global Variable(freeze_time_and_dmg_in_fall, False);
+	}
+}
+
+rule("VARS FOR TP")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	actions
+	{
+		Set Global Variable(J, 27.500);
+		Set Global Variable(T, Empty Array);
+		Modify Global Variable(T, Append To Array, Vector(13.036, 1.252, 10.830));
+		Modify Global Variable(T, Append To Array, Vector(-1.069, 1.252, 12.645));
+		Modify Global Variable(T, Append To Array, Vector(-13.059, 1.252, 12.224));
+		Modify Global Variable(T, Append To Array, Vector(-14.307, 1.252, 4.729));
+		Modify Global Variable(T, Append To Array, Vector(-5.976, 1.252, 4.837));
+		Modify Global Variable(T, Append To Array, Vector(4.748, 1.252, 4.923));
+		Modify Global Variable(T, Append To Array, Vector(13.557, 1.252, 5.058));
+		Modify Global Variable(T, Append To Array, Vector(14.310, 1.252, -3.062));
+		Modify Global Variable(T, Append To Array, Vector(4.813, 1.252, -3.956));
+		Modify Global Variable(T, Append To Array, Vector(-4.192, 1.252, -4.069));
+		Modify Global Variable(T, Append To Array, Vector(-12.235, 1.252, -4.252));
+		Modify Global Variable(T, Append To Array, Vector(-14.925, 1.252, -10.025));
+		Modify Global Variable(T, Append To Array, Vector(-7.742, 1.252, -10.246));
+		Modify Global Variable(T, Append To Array, Vector(-1.517, 1.252, -10.153));
+		Modify Global Variable(T, Append To Array, Vector(4.518, 1.252, -10.274));
+		Modify Global Variable(T, Append To Array, Vector(11.318, 1.252, -10.160));
+		Modify Global Variable(T, Append To Array, Vector(11.274, 1.252, -15.930));
+		Modify Global Variable(T, Append To Array, Vector(1.733, 1.252, -15.748));
+		Modify Global Variable(T, Append To Array, Vector(-5.162, 1.252, -15.677));
+		disabled Set Global Variable(flybots_tp, Array Slice(Global Variable(T), 13, 5));
+		Modify Global Variable(T, Append To Array, Vector(-12.924, 1.252, -15.658));
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(183.372, 28.751, -28.580), Vector(184.827, 28.751, -31.189), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(5.080, 0, 3.180), 1, To World, Replace existing throttle,
+			Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(186.008, 28.751, -31.005), Vector(192.310, 28.751, -31.863), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(5.080, 0, 3.180), 1, To World, Replace existing throttle,
+			Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(193.141, 28.751, -32.518), Vector(197.594, 28.751, -35.876), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(5.080, 0, 3.180), 1, To World, Replace existing throttle,
+			Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(199.879, 28.751, -39.782), Vector(200.184, 28.751, -40.346), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(5.080, 0, 3.180), 1, To World, Replace existing throttle,
+			Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(202.661, 28.752, -60.886), Vector(202.471, 28.752, -64.605), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(5.080, 0, 3.180), 1, To World, Replace existing throttle,
+			Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(191.230, 28.751, -31.492), Vector(199.196, 28.876, -40.346), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(5.080, 0, 3.180), 1, To World, Replace existing throttle,
+			Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(189.694, 28.874, -32.228), Vector(186.034, 28.752, -25.952), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(5.080, 0, 3.180), 1, To World, Replace existing throttle,
+			Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(197.622, 28.752, -63.515), Vector(223.389, 28.752, -63.352), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(0, 0, 6), 1, To World, Replace existing throttle, Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(226.466, 28.752, -57.747), Vector(226.448, 28.752, -24.527), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(-6.000, 0, 0), 1, To World, Replace existing throttle, Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(227.510, 28.751, -17.229), Vector(195.561, 28.751, -17.527), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(0, 0, -6.000), 1, To World, Replace existing throttle, Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(194.990, 28.751, -18.197), Vector(183.392, 28.751, -29.900), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(3.990, 0, -4.480), 1, To World, Replace existing throttle,
+			Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(186.149, 28.751, -29.610), Vector(197.300, 28.751, -34.976), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(6, 0, 0), 1, To World, Replace existing throttle, Direction and Magnitude);
+	}
+}
+
+disabled rule("Rule 103")
+{
+	event
+	{
+		Ongoing - Each Player;
+		Team 2;
+		All;
+	}
+
+	conditions
+	{
+		Ray Cast Hit Player(Vector(200.298, 28.751, -40.346), Vector(193.289, 28.751, -32.818), Players In Slot(1, Team 2), Null, True)
+			== True;
+	}
+
+	actions
+	{
+		disabled Teleport(Event Player, Random Value In Array(Global Variable(T)));
+		Set Global Variable(BOT_HIT_BY_RAY, True);
+		Start Throttle In Direction(Event Player, Vector(6, 0, 0), 1, To World, Replace existing throttle, Direction and Magnitude);
+	}
+}
+
+rule("Insanity Wave coundown")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Player Variable(Event Player, player_is_the_trigger) == True;
+		Global Variable(defused) == False;
+	}
+
+	actions
+	{
+		Create Effect(All Players(All Teams), Energy Sound, Orange, Event Player, 10000, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Sparkles, Orange, Event Player, 2, Visible To Position and Radius);
+		Set Global Variable(current_phase, 1);
+		Wait(25, Abort When False);
+		Create Effect(All Players(All Teams), Cloud, White, Event Player, 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Smoke Sound, White, Event Player, 10000, Visible To Position and Radius);
+		Set Global Variable(current_phase, 2);
+		Wait(25, Abort When False);
+		Create Effect(All Players(All Teams), Sphere, Yellow, Event Player, 2, Visible To Position and Radius);
+		Set Global Variable(current_phase, 3);
+		Wait(10, Abort When False);
+		Set Global Variable(countdown_ended, True);
+		Play Effect(All Players(All Teams), Buff Explosion Sound, White, Event Player, 9999);
+		Play Effect(All Players(All Teams), Ring Explosion, Yellow, Event Player, 10000);
+		Set Global Variable(array_of_team_1_to_be_killed, Remove From Array(All Players(All Teams), Event Player));
+		Wait(0.300, Ignore Condition);
+		Kill(Global Variable(array_of_team_1_to_be_killed), Event Player);
+		Modify Player Variable(Global Variable(array_of_team_1_to_defuse), timed_dead, Add, 1);
+		Wait(0.400, Ignore Condition);
+		Set Global Variable(array_of_team_1_to_be_killed, Empty Array);
+		Set Player Variable(All Players(Team 1), Damage_total, 0);
+		Set Global Variable(not_first_round, True);
+		Destroy All Effects;
+		Wait(3, Ignore Condition);
+		Play Effect(All Players(All Teams), Buff Impact Sound, Aqua, Event Player, 1);
+		Play Effect(All Players(All Teams), Good Pickup Effect, Aqua, Event Player, 1);
+		Wait(0.500, Ignore Condition);
+		Set Global Variable(host_dont_want_to_change_hero, False);
+		Set Global Variable(hero_has_been_chosen, False);
+		Teleport(Event Player, Global Variable(T));
+		Set Global Variable(ROUND_STARTED, 0);
+		Set Global Variable(victory_condition, 0);
+		Set Global Variable(wait_destroy_action_before_hud, 0);
+		Destroy All HUD Text;
+		Wait(0.100, Ignore Condition);
+		Set Global Variable(wait_destroy_action_before_hud, 1);
+		Modify Player Variable(Event Player, times_wave_released, Add, 1);
+	}
+}
+
+rule("Defuse if the trigger player is alone on the game")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Number of Players(Team 1) == 1;
+		Global Variable(victory_condition) == 1;
+	}
+
+	actions
+	{
+		Set Global Variable(defused, True);
+		Big Message(All Players(All Teams), Custom String("Your wave was aborted because you bacame alone in game", Null, Null, Null));
+	}
+}
+
+rule("Static penalty")
+{
+	event
+	{
+		Player Dealt Damage;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Speed Of(Event Player) == 0;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Ana)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Ashe)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Bastion)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Hanzo)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Orisa)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Widowmaker)) == False;
+	}
+
+	actions
+	{
+		Wait(1.500, Abort When False);
+		Set Player Variable(Event Player, static_penalty_applied, True);
+	}
+}
+
+rule("static penalty 2")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Player Variable(Event Player, player_stopped_for_04_seconds) == False;
+	}
+
+	actions
+	{
+		Wait(5, Abort When False);
+		Set Player Variable(Event Player, static_penalty_applied, False);
+	}
+}
+
+rule("static penalty 3")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Player Variable(Event Player, static_penalty_applied) == True;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Ana)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Ashe)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Bastion)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Hanzo)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Orisa)) == False;
+		Compare(Global Variable(the_hero_that_was_chosen), ==, Hero(Widowmaker)) == False;
+	}
+
+	actions
+	{
+		Small Message(Event Player, Custom String("Aiming without moving penalty: Damage -3", Null, Null, Null));
+		Modify Player Variable(Event Player, damage_to_calculate_media, Subtract, 3);
+		Modify Player Variable(Event Player, Damage_total, Subtract, 3);
+		Skip If(Compare(Global Variable(victory_condition), ==, 0), 1);
+		Modify Player Variable(Event Player, damage_total_defuse_squad_player, Subtract, 3);
+		Wait(1, Abort When False);
+		Loop;
+	}
+}
+
+rule("remove penalty when afk")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Button Held(Event Player, Primary Fire) == False;
+	}
+
+	actions
+	{
+		Wait(5, Abort When False);
+		Set Player Variable(Event Player, static_penalty_applied, False);
+	}
+}
+
+rule("HERO CHOICE")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		disabled Global Variable(host_dont_want_to_change_hero) == False;
+		Global Variable(ROUND_STARTED) == 0;
+		disabled Global Variable(wait_destroy_action_before_effec) == True;
+	}
+
+	actions
+	{
+		Destroy All In-World Text;
+		Wait(0.500, Ignore Condition);
+		Set Global Variable(size_of_text_above_orbs, 2);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-8.000, 1.252, -16.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-8.000, 1.252, -12.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-8.000, 1.252, -8.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-8.000, 1.252, -4.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-8.000, 1.252, 0), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-8.000, 1.252, 4), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-8.000, 1.252, 8), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-8.000, 1.252, 12), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-8.000, 1.252, 16), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-4.000, 1.252, -16.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-4.000, 1.252, -12.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-4.000, 1.252, -8.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-4.000, 1.252, -4.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-4.000, 1.252, 0), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-4.000, 1.252, 4), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-4.000, 1.252, 8), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-4.000, 1.252, 12), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(-4.000, 1.252, 16), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(0, 1.252, -16.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(0, 1.252, -12.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(0, 1.252, -8.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(0, 1.252, -4.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(0, 1.252, 0), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(0, 1.252, 4), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(0, 1.252, 8), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(0, 1.252, 12), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(0, 1.252, 16), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(4, 1.252, 4), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(4, 1.252, 0), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(4, 1.252, -4.000), 1, Visible To Position and Radius);
+		Create Effect(All Players(All Teams), Orb, White, Vector(8, 1.252, 0), 1, Visible To Position and Radius);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Ana), Null, Null), Vector(-8.000, 1.800, 16),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Ashe), Null, Null), Vector(-8.000, 1.800, 12),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Baptiste), Null, Null), Vector(-8.000, 1.800, 8),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Bastion), Null, Null), Vector(-8.000, 1.800, 4),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Brigitte), Null, Null), Vector(-8.000, 1.800, 0),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(D.Va), Null, Null), Vector(-8.000, 1.800, -4.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Doomfist), Null, Null), Vector(-8.000, 1.800, -8.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Genji), Null, Null), Vector(-8.000, 1.800, -12.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Hanzo), Null, Null), Vector(-8.000, 1.800, -16.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Junkrat), Null, Null), Vector(-4.000, 1.800, 16),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(LÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºcio), Null, Null), Vector(-4.000, 1.800, 12),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(McCree), Null, Null), Vector(-4.000, 1.800, 8),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Mei), Null, Null), Vector(-4.000, 1.800, 4),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Mercy), Null, Null), Vector(-4.000, 1.800, 0),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Moira), Null, Null), Vector(-4.000, 1.800, -4.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Orisa), Null, Null), Vector(-4.000, 1.800, -8.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Pharah), Null, Null), Vector(-4.000, 1.800, -12.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Reaper), Null, Null), Vector(-4.000, 1.800, -16.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Reinhardt), Null, Null), Vector(0, 1.800, 16),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Roadhog), Null, Null), Vector(0, 1.800, 12),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Sigma), Null, Null), Vector(0, 1.800, 8), Global Variable(
+			size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Soldier: 76), Null, Null), Vector(0, 1.800, 4),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Sombra), Null, Null), Vector(0, 1.800, 0), Global Variable(
+			size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Symmetra), Null, Null), Vector(0, 1.800, -4.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(TorbjÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶rn), Null, Null), Vector(0, 1.800, -8.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Tracer), Null, Null), Vector(0, 1.800, -12.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Widowmaker), Null, Null), Vector(0, 1.800, -16.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Set Status(All Players(Team 2), Null, Phased Out, 9999);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Winston), Null, Null), Vector(4, 1.800, 4), Global Variable(
+			size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Wrecking Ball), Null, Null), Vector(4, 1.800, 0),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Zarya), Null, Null), Vector(4, 1.800, -4.000),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Create In-World Text(All Players(All Teams), Custom String("{0}", Hero(Zenyatta), Null, Null), Vector(8, 1.800, 0),
+			Global Variable(size_of_text_above_orbs), Do Not Clip, Visible To Position and String, White, Default Visibility);
+		Stop Forcing Player To Be Hero(All Players(Team 1));
+		Wait(0.250, Ignore Condition);
+		Stop Throttle In Direction(All Players(Team 2));
+		Allow Button(All Players(Team 1), Primary Fire);
+		Allow Button(All Players(Team 1), Secondary Fire);
+		Allow Button(All Players(Team 1), Ability 1);
+		Allow Button(All Players(Team 1), Ability 2);
+		Allow Button(All Players(Team 1), Ultimate);
+		Set Global Variable(TURN_VICTORY_CONDITION_ON_OFF, False);
+		Set Global Variable(primary_fire_off, False);
+		Set Global Variable(secondary_fire_off, False);
+		Set Global Variable(ability_1_off, False);
+		Set Global Variable(ability_2_off, False);
+		Set Global Variable(Ultimate_on_off, False);
+		Set Global Variable(array_with_players_that_voted, Empty Array);
+		Set Global Variable(array_with_players_that_started, Empty Array);
+	}
+}
+
+rule("Choose 1")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Distance Between(Vector(-8.000, 0, 16), Host Player) <= 2;
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Ana));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("Choose 2")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-8.000, 0, 12), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Ashe));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("Choose 3")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-8.000, 0, 8), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Baptiste));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("Choose 4")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-8.000, 0, 4), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Bastion));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 5")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-8.000, 0, 0), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Brigitte));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("Choose 6")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-8.000, 0, -4.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(D.Va));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("Choose 7")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-8.000, 0, -8.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Doomfist));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Destroy All Effects;
+		Destroy All In-World Text;
+		Small Message(All Players(All Teams), Custom String("Wait 5 seconds to load hero", Null, Null, Null));
+		Preload Hero(All Players(Team 1), All Heroes);
+		Wait(5, Ignore Condition);
+		Set Global Variable(hero_has_been_chosen, True);
+	}
+}
+
+rule("choose 8")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-8.000, 0, -12.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Genji));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 9")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-8.000, 0, -16.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Hanzo));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 10")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-4.000, 0, 16), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Junkrat));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 11")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-4.000, 0, 12), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(LÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºcio));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 12")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-4.000, 0, 8), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(McCree));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 13")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-4.000, 0, 4), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Mei));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 14")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-4.000, 0, 0), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Mercy));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 15")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-4.000, 0, -4.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Moira));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 16")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-4.000, 0, -8.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Orisa));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 17")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-4.000, 0, -12.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Pharah));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 18")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(-4.000, 0, -16.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Reaper));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 19")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(0, 0, 16), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Reinhardt));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 20")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(0, 0, 12), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Roadhog));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 21")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(0, 0, 8), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Sigma));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 22")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(0, 0, 4), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Soldier: 76));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 23")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(0, 0, 0), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Sombra));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 24")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(0, 0, -4.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Symmetra));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 25")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(0, 0, -8.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(TorbjÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¶rn));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 26")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(0, 0, -12.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Tracer));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 27")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(0, 0, -16.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Widowmaker));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 28")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(4, 0, 4), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Winston));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 29")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(4, 0, 0), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Wrecking Ball));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 30")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(4, 0, -4.000), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Zarya));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("choose 31")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 0;
+		Is Game In Progress == True;
+		Global Variable(hero_has_been_chosen) == False;
+		Global Variable(host_dont_want_to_change_hero) == False;
+		Distance Between(Vector(8, 0, 0), Host Player) <= 2;
+		Has Spawned(Host Player) == True;
+		Is Button Held(Host Player, Melee) == True;
+	}
+
+	actions
+	{
+		Set Global Variable(the_hero_that_was_chosen, Hero(Zenyatta));
+		Start Forcing Player To Be Hero(All Players(Team 1), Global Variable(the_hero_that_was_chosen));
+		Set Global Variable(hero_has_been_chosen, True);
+		Destroy All Effects;
+		Destroy All In-World Text;
+	}
+}
+
+rule("create change hero ring after destroy effect")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(ROUND_STARTED) == 1;
+		Global Variable(wait_destroy_action_before_effec) == True;
+	}
+
+	actions
+	{
+		Create Effect(All Players(All Teams), Ring, Sky Blue, Vector(0, 0, 0), 1.800, Visible To Position and Radius);
+	}
+}
+
+rule("create change hero text after destroy in-world text")
+{
+	event
+	{
+		Ongoing - Global;
+	}
+
+	conditions
+	{
+		Global Variable(wait_destroy_action_before_in_wo) == True;
+		Global Variable(ROUND_STARTED) == 1;
+	}
+
+	actions
+	{
+		Create In-World Text(All Players(All Teams), Custom String("Team Hero Change", Null, Null, Null), Vector(0, 1.200, 0), 2,
+			Clip Against Surfaces, Visible To Position and String, White, Default Visibility);
+	}
+}
+
+rule("player wants to change hero")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Distance Between(Vector(0, 0, 0), Event Player) <= 2;
+		Is Button Held(Event Player, Crouch) == True;
+		Number of Players(Team 1) > 1;
+		disabled Player Variable(Event Player, player_voted_for_hero_change) == False;
+		Array Contains(Global Variable(array_with_players_that_voted), Event Player) == False;
+		Global Variable(ROUND_STARTED) == 1;
+	}
+
+	actions
+	{
+		disabled Set Global Variable(host_is_in_hero_change_ring, True);
+		disabled Small Message(Event Player, Custom String("Waiting for the rest of the team to change heroes...", Null, Null, Null));
+		Set Player Variable(Event Player, player_voted_for_hero_change, True);
+		Big Message(All Players(All Teams), Custom String("{0} voted for change heroes. Heroes will change if the entire team vote.",
+			Event Player, Null, Null));
+		Small Message(Event Player, Custom String("You voted for hero change. Press interact button on the area to withdraw the vote.",
+			Null, Null, Null));
+		Set Global Variable(array_with_players_that_voted, Append To Array(Global Variable(array_with_players_that_voted), Event Player));
+		disabled Modify Global Variable(number_of_players_that_voted, Add, 1);
+		disabled Wait(0.100, Ignore Condition);
+		Set Global Variable(array_with_players_that_voted, Sorted Array(Global Variable(array_with_players_that_voted),
+			Index Of Array Value(All Players(Team 1), Current Array Element)));
+		Set Global Variable(chech_how_is_all_players_array, All Players(Team 1));
+	}
+}
+
+rule("player dont want to change hero anymore")
+{
+	event
+	{
+		Ongoing - Each Player;
+		All;
+		All;
+	}
+
+	conditions
+	{
+		Is Button Held(Event Player, Interact) == True;
+		Distance Between(Vector(0, 0, 0), Event Player) <= 2;
+		Number of Players(Team 1) > 1;
+		disabled Player Variable(Event Player, player_voted_for_hero_change) == True;
+		Array Contains(Global Variable(array_with_players_that_voted), Event Player) == True;
+		Global Variable(ROUND_STARTED) == 1;
+	}
+
+	actions
+	{
+		disabled Set Global Variable(host_dont_want_to_change_hero, True);
+		disabled Set Global Variable(hero_has_been_chosen, True);
+		disabled Big Message(All Players(All Teams), Custom String("hERO CHANGE ON NEXT ROUND CANCELED BY {0}", Event Player, Null, Null));
+		Set Player Variable(Event Player, player_voted_for_hero_change, False);
+		Big Message(All Players(All Teams), Custom String("{0} withdrew his vote to change heroes.", Event Player, Null, Null));
+		Set Global Variable(array_with_players_that_voted, Remove From Array(Global Variable(array_with_players_that_voted),
+			Event Player));
+		disabled Modify Global Variable(number_of_players_that_voted, Subtract, 1);
+		Set Global Variable(wait_destroy_action_before_hud, 0);
+		Wait(0.100, Ignore Condition);
+		Destroy All HUD Text;
+		Wait(0.100, Ignore Condition);
+		Set Global Variable(wait_destroy_action_before_hud, 1);
+		Set Global Variable(array_with_players_that_voted, Sorted Array(Global Variable(array_with_players_that_voted),
+			Index Of Array Value(All Players(Team 1), Current Array Element)));
+		Set Global Variable(chech_how_i
